@@ -1,0 +1,12 @@
+http://www.codeproject.com/Articles/996896/Accessing-Environment-Variables-in-ASP-NET-Apps
+https://github.com/aspnet/Entropy/tree/dev/samples (config change notification)
+https://github.com/aspnet/Home/wiki/DNX-Secret-Configuration (how to store secrets in config)
+
+https://weblog.west-wind.com/posts/2015/Jun/03/Strongly-typed-AppSettings-Configuration-in-ASPNET-5
+http://stackoverflow.com/questions/31258601/asp-net-5-mvc-6-console-hosted-app
+http://www.codeproject.com/Articles/127291/C-vNext-New-Asynchronous-Pattern
+http://jakzaprogramowac.pl/pytanie/5221,asp-net-5-class-library-package-test-inject-ioptions
+
+
+//command line switch mappings
+http://bleedingnedge.com/2015/10/15/configuration-providers/

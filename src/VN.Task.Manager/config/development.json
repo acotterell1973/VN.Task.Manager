@@ -1,0 +1,10 @@
+﻿{
+  "taskLib": "vn.task.upstracking.dll",
+  "interfaceType": "IScheduledTask",
+  "externalAssemblyPath": "",
+  "TaskManifest": [
+    "VN.Task.UPStracking",
+    "VN.Task.SMO"
+  ]
+
+}

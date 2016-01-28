@@ -1,0 +1,15 @@
+{
+  "version": "1.0.0-*",
+  "description": "VN.Task.Common Class Library",
+  "authors": [ "acott" ],
+  "tags": [ "" ],
+  "projectUrl": "",
+  "licenseUrl": "",
+  "frameworks": {
+    "net451": { }
+  },
+  "dependencies": {
+    "System.Linq.Queryable": "4.0.1-beta-23516",
+    "VN.Common": "1.0.0-*"
+  }
+}

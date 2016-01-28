@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "VN.Task.Manager": {
+      "commandName": "VN.Task.Manager",
+      "commandLineArgs": "/list",
+      "environmentVariables": {
+        "Key": "Value"
+      }
+    }
+  }
+}
