@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.OptionsModel;
 using Microsoft.Extensions.PlatformAbstractions;
 using VN.Task.Manager.config;
-using VN.DependencyInjection.Extensions;
 using VN.DependencyInjection;
+using VN.DependencyInjection.Extensions;
+using static System.Console;
 
 namespace VN.Task.Manager
 {
@@ -15,47 +15,56 @@ namespace VN.Task.Manager
     {
         private static IConfigurationRoot _configuration;
         private static IServiceProvider _provider;
-        private readonly IApplicationEnvironment _environment;
+        private readonly IConfigurationBuilder _configurationBuilder;
+        private readonly IServiceCollection _services;
+
 
         public Startup(IApplicationEnvironment env)
         {
-            _environment = env;
+            _configurationBuilder = new ConfigurationBuilder();
+            _services = new ServiceCollection();
         }
+
+        public static IRuntimeEnvironment Runtime => PlatformServices.Default.Runtime;
+
+        public static IApplicationEnvironment Application => PlatformServices.Default.Application;
+
+        public static int DisplayWidth => WindowWidth;
 
         public static TaskManagerConfigurationSettings ConfigurationSettings { get; private set; }
 
-        public void Configure(IConfigurationBuilder configurationBuilder, string[] args)
+        public void Configure( string[] args)
         {
 
             var switchMappings = new Dictionary<string, string>
             {
-                {"--text", "showText" },
-                {"-t", "showText" },
+                {"--help", "displayHelp" },
+                {"-h", "displayHelp" },
             };
 
-            configurationBuilder
-                .SetBasePath(_environment.ApplicationBasePath)
+            _configurationBuilder
+                .SetBasePath(Application.ApplicationBasePath)
                 .AddJsonFile($@"config\development.json");
 
-            //determine if argument is in name/value pair
-            if(false) configurationBuilder.AddCommandLine(args, switchMappings);
+            //determine if argument is in name/value pair (this is if you ever want to override any of the application settings)
+            if(false) _configurationBuilder.AddCommandLine(args, switchMappings);
 
 
-            _configuration = configurationBuilder.Build();
+            _configuration = _configurationBuilder.Build();
         }
 
-        public void ConfigureServices(IServiceCollection services)
+        public void ConfigureServices()
         {
-            services.AddOptions();
-            services.Configure<TaskManagerConfigurationSettings>(_configuration.GetSection(string.Empty));
+            _services.AddOptions();
+            _services.Configure<TaskManagerConfigurationSettings>(_configuration.GetSection(string.Empty));
 
             ConfigurationSettings = _configuration.Get<TaskManagerConfigurationSettings>();
 
-            services.AddApplicationInsightsTelemetry(_configuration);
-            services.AddInstance<IAssemblyLoadContext>(PlatformServices.Default.AssemblyLoadContextAccessor.Default);
-            services.AddInstance<ILibraryManager>(PlatformServices.Default.LibraryManager);
-            services.AddTransient<IConfigureOptions<RegisterDependencyTypeOptions>, RegisterDependencyTypeOptionsSetup>();
-            services.Configure<RegisterDependencyTypeOptions>(options =>
+            _services.AddApplicationInsightsTelemetry(_configuration);
+            _services.AddInstance<IAssemblyLoadContext>(PlatformServices.Default.AssemblyLoadContextAccessor.Default);
+            _services.AddInstance<ILibraryManager>(PlatformServices.Default.LibraryManager);
+            _services.AddTransient<IConfigureOptions<RegisterDependencyTypeOptions>, RegisterDependencyTypeOptionsSetup>();
+            _services.Configure<RegisterDependencyTypeOptions>(options =>
             {
                 options.AssemblyPathLocation = ConfigurationSettings.ExternalAssemblyPath;
                 options.InjectFromInterfaceName = ConfigurationSettings.InterfaceType;
@@ -63,11 +72,11 @@ namespace VN.Task.Manager
             });
 
             //Custom Application Services
-            services.AddDependencyScanner()
+            _services.AddDependencyScanner()
                 .AddDependencyScan()
                 .AddDependencyScanFromAllAssemblies();
 
-            _provider = services.BuildServiceProvider();
+            _provider = _services.BuildServiceProvider();
             
         }
 

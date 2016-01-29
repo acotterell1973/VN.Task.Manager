@@ -10,3 +10,6 @@ http://jakzaprogramowac.pl/pytanie/5221,asp-net-5-class-library-package-test-inj
 
 //command line switch mappings
 http://bleedingnedge.com/2015/10/15/configuration-providers/
+
+//custom dnx commands
+http://jameschambers.com/2015/08/writing-custom-commands-for-dnx-with-asp-net-5-0/
