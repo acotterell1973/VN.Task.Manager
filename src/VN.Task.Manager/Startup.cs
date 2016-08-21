@@ -51,6 +51,7 @@ namespace VN.Task.Manager
 
 
             _configuration = _configurationBuilder.Build();
+            
         }
 
         public void ConfigureServices()
@@ -77,7 +78,9 @@ namespace VN.Task.Manager
                 .AddDependencyScanFromAllAssemblies();
 
             _provider = _services.BuildServiceProvider();
-            
+  
+
+
         }
 
         public T GetService<T>()

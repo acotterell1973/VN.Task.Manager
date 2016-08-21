@@ -13,3 +13,6 @@ http://bleedingnedge.com/2015/10/15/configuration-providers/
 
 //custom dnx commands
 http://jameschambers.com/2015/08/writing-custom-commands-for-dnx-with-asp-net-5-0/
+
+//MISC
+http://www.tugberkugurlu.com/archive/getting-the-clients-ip-address-in-asp-net-vnext-web-applications

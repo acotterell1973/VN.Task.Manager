@@ -1,10 +1,13 @@
 ﻿{
-  "taskLib": "vn.task.upstracking.dll",
-  "interfaceType": "IScheduledTask",
-  "externalAssemblyPath": "",
-  "TaskManifest": [
-    "VN.Task.UPStracking",
-    "VN.Task.SMO"
-  ]
+  "ApplicationInsights": {
+    "InstrumentationKey": "9647cf99-28b9-4d12-b962-b210dfcb0b94"
+  },
+    "taskLib": "vn.task.upstracking.dll",
+    "interfaceType": "IScheduledTask",
+    "externalAssemblyPath": "",
+    "TaskManifest": [
+      "VN.Task.UPStracking",
+      "VN.Task.SMO"
+    ]
 
-}
+  }

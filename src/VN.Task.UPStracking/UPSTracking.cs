@@ -9,15 +9,16 @@ namespace VN.Task.UPStracking
     [ScopedDependency(ServiceType = typeof (IScheduledTask))]
     public sealed class UpsTracking : BaseSingleThreadedTask
     {
-        private const string taskCode = "x";
-          
-        public UpsTracking() : base(taskCode)
+        private const string TracingCategory = "VN.Task.UPStracking";
+
+        public UpsTracking() : base(TracingCategory)
         {
         }
 
-        public override string TaskCode => "TASK_CODE";
-        public override string TaskName => "stufhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhkkkkkkkkkkkkkkkkkkf";
-        public override string TaskDescription => "stuffjjjjjjjjjjjjjjjjjhhhhhhhhhhhhhh";
+
+        public override string TaskCode => "VN_SHIPPING_UPSTRACKING";
+        public override string TaskName => "VendorNet Shpipping Ups Tracking Scheduled Task";
+        public override string TaskDescription => "Calls out to UPS and downloads the tracking numbers for the givin shipped items.";
 
         public override bool Run()
         {

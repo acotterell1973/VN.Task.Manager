@@ -2,6 +2,7 @@
   "profiles": {
     "VN.Task.Manager": {
       "commandName": "VN.Task.Manager",
+      "commandLineArgs": "/run VN_SHIPPING_UPSTRACKING",
       "environmentVariables": {
         "Key": "Value"
       }
